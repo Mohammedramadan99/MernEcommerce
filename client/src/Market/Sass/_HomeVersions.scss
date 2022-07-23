@@ -1,0 +1,59 @@
+.homeVersions {
+    padding: $padding_branch_section;
+
+    .container {
+        @include grid(500);
+
+        .item {
+            @include flex($dir: column);
+
+            .btn--version {
+                text-transform: capitalize;
+                padding: 10px 20px;
+                margin: 20px 0;
+                display: inline-block;
+                border: 2px solid $primary-color;
+                border-radius: 50px;
+                transition: $speed-transition ;
+
+                &:hover {
+                    background-color: $primary-color;
+                    color: #fff !important;
+                }
+            }
+
+            .img {
+                width: 500px;
+                max-height: 500px;
+                overflow: hidden;
+                transition: $speed-transition;
+
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                    transition: 7s ease-in-out;
+                    transform: translateY(0);
+                }
+
+                &:hover {
+                    img {
+                        transform: translateY(-70%);
+                    }
+                }
+            }
+
+            .soon {
+                height: 500px;
+                @include flex();
+                font-size: 130px;
+                color: $primary-color;
+
+                span {
+                    display: block;
+                    font-size: 15px;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}

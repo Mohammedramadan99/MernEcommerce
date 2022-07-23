@@ -1,0 +1,21 @@
+.success{
+    .container{
+        height: 50vh;
+        @include flex($dir:column);
+        p{
+            font-weight: 500;
+            color: $primary-color;
+        } 
+        a{
+            text-transform: capitalize;
+            background-color: lighten($primary-color,10);
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: #fff !important;
+            transition: $speed-transition;
+            &:hover{
+                background-color: $primary-color;
+            }
+        }
+    }
+}

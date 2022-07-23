@@ -1,0 +1,26 @@
+@import './globals';
+
+.accessDenied {
+    height: 80vh;
+
+    .container {
+        @include flex($dir: column);
+
+
+        .img {
+            width: 400px;
+            margin-top: 50px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        p {
+            text-transform: capitalize;
+            font-size: 30px;
+        }
+    }
+}

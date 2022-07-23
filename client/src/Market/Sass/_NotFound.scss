@@ -1,0 +1,27 @@
+.notFound {
+    padding: 50px 0;
+    @include flex($dir: column);
+    height: 70vh;
+
+    .img {
+        width: 250px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    p {
+        font-size: 60px;
+        text-transform: capitalize;
+        color: $primary-color;
+    }
+
+    a {
+        text-transform: capitalize;
+
+        span {
+            font-weight: 600;
+        }
+    }
+}
