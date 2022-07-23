@@ -1,8 +1,8 @@
 // ! i've a question : when does the token create?
-const ErrorHander = require("../utils/errorHandler.js");
+const ErrorHander = require("../Utils/errorHandler.js");
 const catchAsyncError = require("../middleware/catchAsyncError.js");
 const User = require("../Model/userModel.js");
-const ErrorHandler = require("../utils/errorHandler.js");
+const ErrorHandler = require("../Utils/errorHandler.js");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const getResetPasswordToken = require("../Model/userModel.js");

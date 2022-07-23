@@ -1,7 +1,7 @@
-const  ErrorHander = require( "../utils/errorHandler.js")
-const  catchAsyncError= require( "./catchAsyncError.js")
-const  jwt = require( "jsonwebtoken")
-const  User = require( "../Model/userModel.js")
+const ErrorHander = require("../Utils/errorHandler.js");
+const catchAsyncError = require("./catchAsyncError.js");
+const jwt = require("jsonwebtoken");
+const User = require("../Model/userModel.js");
 
 module.exports.isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
   const { token } = req.cookies;
@@ -35,10 +35,9 @@ module.exports.resetAuth = catchAsyncError(async (req, res, next) => {
   }
 });
 
-
 module.exports.authorizeRoles = (...roles) => {
   return (req, res, next) => {
-    console.log(req.user.role)
+    console.log(req.user.role);
     if (!roles.includes(req.user.role)) {
       return next(
         new ErrorHander(
