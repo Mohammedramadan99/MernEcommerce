@@ -10,6 +10,7 @@ const payment = require("./Routers/paymentRoute");
 const PostRouter = require("./Routers/PostRoute");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
+const cloudinary = require("cloudinary");
 
 require("express-async-errors");
 
