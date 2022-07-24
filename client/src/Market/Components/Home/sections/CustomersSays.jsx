@@ -7,12 +7,12 @@ import Spinner from '../../Layout/Spinner'
 import { Rating } from '@mui/lab'
 
 // swiper slider
-// import { Swiper, SwiperSlide } from 'swiper/react'
-// import 'swiper/css'
-// import 'swiper/css/navigation'
-// import 'swiper/css/pagination'
-// import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper/core'
-// SwiperCore.use([EffectCoverflow, Pagination, Navigation])
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper/core'
+SwiperCore.use([EffectCoverflow, Pagination, Navigation])
 
 
 export default function CustomersSays()
@@ -32,7 +32,7 @@ export default function CustomersSays()
           what our <strong> cusomers say? </strong>
         </div>
         <div className="boxes">
-          {/* <div className="swiper" data-aos="zoom-out">
+          <div className="swiper" data-aos="zoom-out">
             {isLoading ? <Spinner /> : isSuccess && (
               <div className="swiper-container" >
                 <div className="animation">
@@ -61,7 +61,7 @@ export default function CustomersSays()
                           <div className="img">
                             <img src={rev.images[0].url} alt="" />
                           </div>
-                         
+
                           <div className="rating">
                             <Rating value={rev.rating} readOnly={true} precision={.5} />
                           </div>
@@ -77,7 +77,7 @@ export default function CustomersSays()
                 </div>
               </div>
             )}
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
