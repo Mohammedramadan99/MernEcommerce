@@ -7,12 +7,12 @@ import { motion } from 'framer-motion/dist/es/index'
 import Spinner from '../../Layout/Spinner'
 
 // swiper slider 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper/core'
-SwiperCore.use([EffectCoverflow, Pagination, Navigation])
+// import { Swiper, SwiperSlide } from 'swiper/react'
+// import 'swiper/css'
+// import 'swiper/css/navigation'
+// import 'swiper/css/pagination'
+// import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper/core'
+// SwiperCore.use([EffectCoverflow, Pagination, Navigation])
 
 export default function Products()
 {
@@ -67,7 +67,7 @@ export default function Products()
                             <li key={i} className={activeList === item ? `list-group-item active` : `list-group-item`} data-filter={item} onClick={() => listHandler(item)} > {item} </li>
                         ))}
                     </ul>
-                    <div className="swiper" data-aos="fade-up">
+                    {/* <div className="swiper" data-aos="fade-up">
                         {isLoading ? <Spinner /> : isSuccess && (
                             <div className="swiper-container">
                                 <div className="animation">
@@ -102,7 +102,7 @@ export default function Products()
                                 </div>
                             </div>
                         )}
-                    </div>
+                    </div> */}
                 </div>
                 <Link to="/products" className="btn">shop now</Link>
             </div>
