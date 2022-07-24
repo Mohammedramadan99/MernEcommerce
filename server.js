@@ -44,6 +44,11 @@ app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDNARY_NAME,
+  api_key: process.env.CLOUDNARY_API_KEY,
+  api_secret: process.env.CLOUDNARY_API_SECRET,
+});
 app.use(express.static("client/build"));
 app.get("*", (req, res) =>
   res.sendFile(`${__dirname}/client/build/index.html`)
