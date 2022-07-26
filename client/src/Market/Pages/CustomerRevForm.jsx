@@ -19,57 +19,40 @@ export default function CustomerRevForm()
     });
   }, []);
 
-  const { customerRevs, isLoading, isSuccess, isError, message } = useSelector(state => state.customerRevs)
-  const [email, setEmail] = useState(user.email);
+  const { customerRevs, isLoading, isSuccess, revAdded, isError, message } = useSelector(state => state.customerRevs)
+  const [email, setEmail] = useState("");
   const [name, setName] = useState(user.name);
   const [revContent, setRevContent] = useState("");
   const [rating, setRating] = useState(0);
   const [address, setAddress] = useState("");
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
 
-  const createProductImagesChange = (e) =>
-  {
-    const files = Array.from(e.target.files);
-    setImages([]);
-    setImagesPreview([]);
 
-    files.forEach((file) =>
-    {
-      const reader = new FileReader();
 
-      reader.onload = () =>
-      {
-        if (reader.readyState === 2)
-        {
-          setImagesPreview((old) => [...old, reader.result]);
-          setImages((old) => [...old, reader.result]);
-        }
-      };
-      console.log(images)
-      reader.readAsDataURL(file);
-    });
-  };
+  // const [imagePreview, setImgPreview] = useState("");
+
+  // const createProductImageChange = (e) =>
+  // {
+  //   const reader = new FileReader();
+
+  //   reader.onload = () =>
+  //   {
+  //     if (reader.readyState === 2)
+  //     {
+  //       setImgPreview(reader.result);
+  //       setImg(reader.result);
+  //     }
+  //   };
+  //   reader.readAsDataURL(e.target.files[0]);
+  // };
 
   const createProductSubmitHandler = (e) =>
   {
     e.preventDefault();
-
-    const myForm = new FormData();
-
-    myForm.set("name", name);
-    myForm.set("email", email);
-    myForm.set("address", address);
-    myForm.set("revContent", revContent);
-    myForm.set("rating", rating);
-
-    images.forEach((image) =>
-    {
-      myForm.append("images", image);
-    });
-
-    console.log(myForm)
-    dispatch(newCustomerRev(myForm));
+    const customerRevsData = {
+      name, email: user.email, address, revContent, rating, image: user?.personalImage?.url
+    }
+    console.log(customerRevsData)
+    dispatch(newCustomerRev(customerRevsData));
   };
 
   useEffect(() =>
@@ -79,7 +62,7 @@ export default function CustomerRevForm()
       toast.error(message)
       dispatch(reset())
     }
-    if (isSuccess)
+    if (revAdded)
     {
       toast.success(`thanks ${user.name},we're happy for your review`)
       dispatch(reset())
@@ -93,6 +76,7 @@ export default function CustomerRevForm()
       duration: 2000
     });
   }, []);
+
   return isLoading ? <Spinner /> : (
     <div className='customerRev_form' data-aos="zoom-in" >
       <div className="container">
@@ -101,10 +85,7 @@ export default function CustomerRevForm()
             <label>name</label>
             <input type="text" value={user.name} name="name" onChange={(e) => setName(e.target.value)} />
           </div>
-          <div className="item">
-            <label> email </label>
-            <input type="email" value={user.email ? user.email : email} name="email" onChange={(e) => setEmail(e.target.value)} />
-          </div>
+
           <div className="item">
             <label> rating </label>
             <input type="number" name="rating" onChange={(e) => setRating(e.target.value)} />
@@ -117,22 +98,6 @@ export default function CustomerRevForm()
           <div className="item">
             <label> address </label>
             <input type="text" name="address" onChange={(e) => setAddress(e.target.value)} />
-          </div>
-          <div className="item">
-            <label> image </label>
-            <input
-              type="file"
-              name="avatar"
-              className="imageField"
-              accept="image/*"
-              onChange={createProductImagesChange}
-              multiple
-            />
-            <div className="img_preview">
-              {imagesPreview.map((image, index) => (
-                <img key={index} src={image} alt="Product Preview" />
-              ))}
-            </div>
           </div>
           <input type="submit" />
         </form>

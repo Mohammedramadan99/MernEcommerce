@@ -17,7 +17,7 @@ const Profile = () =>
                         <div className="h3">My Profile</div>
                         <div className="container">
                             <div className="img">
-                                <img src={user.personalImage.url} alt={user.name} />
+                                <img src={user?.personalImage?.url} alt={user.name} />
                                 <Link to="/profile/update">Edit Profile</Link>
                             </div>
                             <div className="info">

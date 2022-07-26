@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { createPost, reset } from '../../redux/blog/blogSlice'
+import Spinner from '../Layout/Spinner'
 
 export default function NewPost()
 {
@@ -9,7 +10,7 @@ export default function NewPost()
     const { id } = useParams()
     const navigate = useNavigate()
     const { user } = useSelector(state => state.auth.userInfo)
-    const { postDetails, postCreated } = useSelector(state => state.blog)
+    const { postDetails, postCreated, isLoading } = useSelector(state => state.blog)
     const { title } = postDetails
     const [postTitle, setPostTitle] = useState(title)
     const [descHead, setDescHead] = useState("")
@@ -74,46 +75,48 @@ export default function NewPost()
                 write a post
             </div>
             <div className="container">
-                <form className="form" onSubmit={writePostHandler}>
-                    <div className="item title">
-                        <label>title</label>
-                        <input type="text" name="name" value={postTitle} placeholder="post title" onChange={(e) => setPostTitle(e.target.value)} />
-                    </div>
-
-                    <label> post content </label>
-                    <div className="content">
-                        <div className="item heading">
-                            <input type="text" name="descHead" placeholder='heading' onChange={(e) => setDescHead(e.target.value)} />
+                {isLoading ? <Spinner /> : (
+                    <form className="form" onSubmit={writePostHandler}>
+                        <div className="item title">
+                            <label>title</label>
+                            <input type="text" name="name" value={postTitle} placeholder="post title" onChange={(e) => setPostTitle(e.target.value)} />
                         </div>
-                        <div className="item desc">
-                            <textarea name="descText" placeholder='description' onChange={(e) => setDescText(e.target.value)} />
-                        </div>
-                    </div>
-                    <div className="item">
-                        <label>category</label>
-                        <input type="text" name="categories" placeholder='category' onChange={(e) => setCategories(e.target.value)} />
-                    </div>
-                    <div className="item">
-                        <label> image </label>
-                        <input
-                            type="file"
-                            name="avatar"
-                            className="imageField"
-                            accept="image/*"
-                            onChange={createPostImageChange}
-                            multiple
-                        />
-                        <div className="img_preview">
-                            <div className="img">
-                                {imagePreview && <img src={imagePreview} alt="Product Preview" />}
 
+                        <label> post content </label>
+                        <div className="content">
+                            <div className="item heading">
+                                <input type="text" name="descHead" placeholder='heading' onChange={(e) => setDescHead(e.target.value)} />
+                            </div>
+                            <div className="item desc">
+                                <textarea name="descText" placeholder='description' onChange={(e) => setDescText(e.target.value)} />
                             </div>
                         </div>
-                    </div>
-                    <div className="submit">
-                        <input type="submit" />
-                    </div>
-                </form>
+                        <div className="item">
+                            <label>category</label>
+                            <input type="text" name="categories" placeholder='category' onChange={(e) => setCategories(e.target.value)} />
+                        </div>
+                        <div className="item">
+                            <label> image </label>
+                            <input
+                                type="file"
+                                name="avatar"
+                                className="imageField"
+                                accept="image/*"
+                                onChange={createPostImageChange}
+                                multiple
+                            />
+                            <div className="img_preview">
+                                <div className="img">
+                                    {imagePreview && <img src={imagePreview} alt="Product Preview" />}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className="submit">
+                            <input type="submit" />
+                        </div>
+                    </form>
+                )}
             </div>
         </div>
     )

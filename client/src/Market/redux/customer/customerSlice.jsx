@@ -6,6 +6,7 @@ const initialState = {
     allCustomerRevs: [],
     isLoading: false,
     isSuccess: false,
+    revAdded: false,
     isError: false,
     message: ''
 }
@@ -29,6 +30,7 @@ export const customerRevSlice = createSlice({
             state.isLoading = false
             state.isError = false
             state.isSuccess = false
+            state.revAdded = false
             state.message = ''
 
         },
@@ -43,7 +45,7 @@ export const customerRevSlice = createSlice({
             .addCase(newCustomerRev.fulfilled, (state, action) =>
             {
                 state.isLoading = false
-                state.isSuccess = true
+                state.revAdded = true
                 state.customerRevs.push(action.payload)
             })
             .addCase(newCustomerRev.rejected, (state, action) =>
