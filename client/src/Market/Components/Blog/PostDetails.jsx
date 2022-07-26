@@ -48,7 +48,7 @@ function PostDetails()
     return isLoading ? <Spinner /> : (
         <div className="blogDetails" >
             <div className="img">
-                <img src={postImg.url} alt="" />
+                <img src={postImg?.url} alt="" />
             </div>
 
             <div className="container">
