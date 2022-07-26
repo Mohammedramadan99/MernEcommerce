@@ -33,43 +33,41 @@ const postController = {
   //CREATE POST
   createPost: catchAsyncError(async (req, res) => {
     try {
-      let images = [];
+      const {
+        user: userId,
+        username,
+        title,
+        paragraphs,
+        categories,
+        postImg,
+      } = req.body;
+      const myCloud = await cloudinary.v2.uploader.upload(req.body.postImg, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale",
+      });
+      const newPost = await Post.create({
+        username,
+        title,
+        paragraphs,
+        categories,
+        postImg: {
+          public_id: myCloud.public_id,
+          url: myCloud.secure_url,
+        },
+      });
 
-      if (typeof req.body.images === "string") {
-        images.push(req.body.images);
-      } else {
-        images = req.body.images;
-      }
-
-      const imagesLinks = [];
-
-      for (let i = 0; i < images.length; i++) {
-        const result = await cloudinary.v2.uploader.upload(images[i], {
-          folder: "social media",
-        });
-
-        imagesLinks.push({
-          public_id: result.public_id,
-          url: result.secure_url,
-        });
-      }
-
-      req.body.images = imagesLinks;
-      const newPost = await Post.create(req.body);
-      const savedPost = await newPost.save();
-
-      const userId = req.body.userInfo._id;
       const user = await User.findById(userId);
-      await user.updateOne({ $push: { posts: savedPost } }); // after update you need to return the new user to frontend
+      await user.updateOne({ $push: { posts: newPost } }); // after update you need to return the new user to frontend
       const updatedUser = await User.find();
 
       res.status(200).json({
         success: true,
-        post: savedPost,
+        post: newPost,
         updatedUser,
       });
     } catch (err) {
-      res.status(500).json({
+      res.status(404).json({
         success: false,
         message: err,
       });

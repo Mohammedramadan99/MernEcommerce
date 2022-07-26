@@ -1,42 +1,36 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { createPost } from '../../redux/blog/blogSlice'
+import { createPost, reset } from '../../redux/blog/blogSlice'
 
 export default function NewPost()
 {
     const dispatch = useDispatch()
     const { id } = useParams()
-    const { title } = useSelector(state => state.blog.postDetails)
+    const navigate = useNavigate()
+    const { user } = useSelector(state => state.auth.userInfo)
+    const { postDetails, postCreated } = useSelector(state => state.blog)
+    const { title } = postDetails
     const [postTitle, setPostTitle] = useState(title)
     const [descHead, setDescHead] = useState("")
     const [descText, setDescText] = useState("")
     const [categories, setCategories] = useState("")
-    const [images, setImages] = useState([]);
-    const [imagesPreview, setImagesPreview] = useState([]);
-    const { user } = useSelector(state => state.auth.userInfo)
+    const [image, setImage] = useState("");
+    const [imagePreview, setImagePreview] = useState("");
 
-    const createPostImagesChange = (e) =>
+    const createPostImageChange = (e) =>
     {
-        const files = Array.from(e.target.files);
-        setImages([]);
-        setImagesPreview([]);
+        const reader = new FileReader();
 
-        files.forEach((file) =>
+        reader.onload = () =>
         {
-            const reader = new FileReader();
-
-            reader.onload = () =>
+            if (reader.readyState === 2)
             {
-                if (reader.readyState === 2)
-                {
-                    setImagesPreview((old) => [...old, reader.result]);
-                    setImages((old) => [...old, reader.result]);
-                }
-            };
-            console.log(images)
-            reader.readAsDataURL(file);
-        });
+                setImagePreview(reader.result);
+                setImage(reader.result);
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
     };
 
     const writePostHandler = (e) =>
@@ -52,17 +46,27 @@ export default function NewPost()
         paragraphs.push(descItem)
 
         const data = {
+            user: user._id,
             username: user.name,
             title: postTitle,
             paragraphs,
             categories: categoriesArray,
-            images
+            postImg: image
         }
 
         dispatch(createPost(data))
 
         console.log(data)
     }
+
+    useEffect(() =>
+    {
+        if (postCreated)
+        {
+            dispatch(reset())
+            navigate('/blog')
+        }
+    }, [postCreated])
 
     return (
         <div className='blog__new__post'>
@@ -96,15 +100,14 @@ export default function NewPost()
                             name="avatar"
                             className="imageField"
                             accept="image/*"
-                            onChange={createPostImagesChange}
+                            onChange={createPostImageChange}
                             multiple
                         />
                         <div className="img_preview">
-                            {imagesPreview.map((image, index) => (
-                                <div className="img">
-                                    <img key={index} src={image} alt="Product Preview" />
-                                </div>
-                            ))}
+                            <div className="img">
+                                {imagePreview && <img src={imagePreview} alt="Product Preview" />}
+
+                            </div>
                         </div>
                     </div>
                     <div className="submit">

@@ -19,8 +19,8 @@ export default function SignUp()
         (state) => state.auth
     );
 
-    const [coverImage, setCoverImage] = useState("")
-    const [coverImagePreview, setCoverImagePreview] = useState("")
+    const [img, setImg] = useState("")
+    const [imgPreview, setImgPreview] = useState("")
 
     useEffect(() =>
     {
@@ -28,10 +28,10 @@ export default function SignUp()
         {
             toast.error(message);
         }
-        if (isSuccess)
-        {
-            navigate("/");
-        }
+        // if (isSuccess)
+        // {
+        //     navigate("/");
+        // }
         // dispatch(reset());
     }, [user, isError, isSuccess, message, navigate, dispatch]);
 
@@ -47,14 +47,11 @@ export default function SignUp()
     {
         e.preventDefault()
         const userData = {
-            name, email, password
+            name, email, password, image: img
         }
         dispatch(register(userData))
     }
-    if (isLoading)
-    {
-        return <Spinner />
-    }
+
     const createCoverImagesChange = (e) =>
     {
         const reader = new FileReader();
@@ -63,13 +60,13 @@ export default function SignUp()
         {
             if (reader.readyState === 2)
             {
-                setCoverImagePreview(reader.result);
-                setCoverImage(reader.result);
+                setImgPreview(reader.result);
+                setImg(reader.result);
             }
         };
         reader.readAsDataURL(e.target.files[0]);
     };
-    return (
+    return isLoading ? <Spinner /> : (
         <div className="register">
             {message && message}
             <form onSubmit={signup}>
@@ -109,6 +106,10 @@ export default function SignUp()
                         onChange={createCoverImagesChange}
                     />
                 </div>
+                <div className="previewImg">
+                    {imgPreview && <img src={imgPreview} alt="" />}
+
+                </div>
                 <div className="field">
                     <input
                         type="submit"
@@ -117,6 +118,7 @@ export default function SignUp()
                     />
                 </div>
             </form>
+
         </div>
     );
 }

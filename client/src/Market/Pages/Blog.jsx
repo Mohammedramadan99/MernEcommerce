@@ -70,7 +70,8 @@ export default function Blog()
                                         {post.username}
                                     </div>
                                 </div>
-                                <img src={post.images[0].url} alt="img" />
+                                {post?.postImg && <img src={post.postImg.url} alt="img" />}
+
                             </div>
                             <div className="info">
                                 <div className="title"> {post.title} </div>

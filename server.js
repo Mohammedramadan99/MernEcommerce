@@ -6,6 +6,7 @@ const userRouter = require("./Routers/userRouter");
 const orderRouter = require("./Routers/orderRouter");
 const customerRev = require("./Routers/CustomerRevsRoute");
 const payment = require("./Routers/paymentRoute");
+const errorMiddlerware = require("./middleware/error");
 
 const PostRouter = require("./Routers/PostRoute");
 const cookieParser = require("cookie-parser");
@@ -44,6 +45,7 @@ app.use("/api/v1", PostRouter);
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
+app.use(errorMiddlerware);
 
 cloudinary.config({
   cloud_name: process.env.CLOUDNARY_NAME,
