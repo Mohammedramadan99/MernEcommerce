@@ -50,6 +50,7 @@ const UpdateUser = lazy(() => import("./Components/Admin/UpdateUser"))
 const UpdateProfile = lazy(() => import("./Components/User/UpdateProfile"))
 const ForgotPassword = lazy(() => import("./Components/User/ForgotPassword"))
 const ResetPassword = lazy(() => import("./Components/User/ResetPassword"))
+
 export const App = () =>
 {
 
@@ -81,54 +82,54 @@ export const App = () =>
     <>
       <Navbar />
       <ToastContainer />
-      <Elements stripe={loadStripe('pk_test_51KU7PlKTQl5sdnSan4XZdyG8ROCvMps693X5fs4PDrQSR8UahyknWe9GPkuem5zqhyoLGE8GKmFa3fPRmq23joWV00XB7Rlte3')}>
+      {/* <Elements stripe={loadStripe('pk_test_51KU7PlKTQl5sdnSan4XZdyG8ROCvMps693X5fs4PDrQSR8UahyknWe9GPkuem5zqhyoLGE8GKmFa3fPRmq23joWV00XB7Rlte3')}> */}
+      <Suspense fallback={<div>loading...</div>}>
         <Routes>
-          <Suspense fallback={<div />}>
-            <Route path="/" element={<HomeVersions />} />
-            <Route path='/home-v1' element={<HomeOne />} />
-            <Route path='/home-v2' element={<HomeTwo />} />
-            <Route path="/product/:productID" element={<SingleProduct />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/password/reset/:token" element={<ResetPassword />} />
-            <Route path="/password/forgot" element={<ForgotPassword />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:cat" element={<Products />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/new" element={<NewPost />} />
-            <Route path="/blog/:id" element={<PostDetails />} />
-            <Route path="/blog/edit/:id" element={<EditPost />} />
-            {/* <Route path="/blog/new" element={<EditPost/>} /> */}
+          <Route path="/" element={<HomeVersions />} />
+          <Route path='/home-v1' element={<HomeOne />} />
+          <Route path='/home-v2' element={<HomeTwo />} />
+          <Route path="/product/:productID" element={<SingleProduct />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/password/reset/:token" element={<ResetPassword />} />
+          <Route path="/password/forgot" element={<ForgotPassword />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:cat" element={<Products />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/new" element={<NewPost />} />
+          <Route path="/blog/:id" element={<PostDetails />} />
+          <Route path="/blog/edit/:id" element={<EditPost />} />
+          {/* <Route path="/blog/new" element={<EditPost/>} /> */}
 
-            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sed cupiditate non autem doloribus id maxime, ratione voluptatibus quibusdam! Distinctio blanditiis facilis dolorum non, culpa impedit! Tenetur quae voluptate dolore. */}
+          {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sed cupiditate non autem doloribus id maxime, ratione voluptatibus quibusdam! Distinctio blanditiis facilis dolorum non, culpa impedit! Tenetur quae voluptate dolore. */}
 
-            {/* only for users */}
-            <Route element={<ProductedUserRoute />}>
-              <Route path="/shipping" element={<ShippingAddress />} />
-              <Route path="/payment" element={<Payment />} />
-              <Route path="/success" element={<Success />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/order/:id" element={<OrderDetails />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/profile/update" element={<UpdateProfile />} />
-              <Route path="/customer/FAQ" element={<CustomerRevForm />} />
+          {/* only for users */}
+          <Route element={<ProductedUserRoute />}>
+            <Route path="/shipping" element={<ShippingAddress />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/order/:id" element={<OrderDetails />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/update" element={<UpdateProfile />} />
+            <Route path="/customer/FAQ" element={<CustomerRevForm />} />
 
-              {/* only for admin */}
-              <Route element={<ProductedAdminRoute />}>
-                <Route path="/admin/dashboard" element={<Dashboard />} />
-                <Route path="/admin/products" element={<ProductsList />} />
-                <Route path="/admin/product" element={<NewProduct />} />
-                <Route path="/admin/product/:id" element={<UpdateProduct />} />
-                <Route path="/admin/orders" element={<OrderList />} />
-                <Route path="/admin/order/:id" element={<ProcessOrder />} />
-                <Route path="/admin/users" element={<UsersList />} />
-                <Route path="/admin/user/:id" element={<UpdateUser />} />
-                <Route path="/admin/reviews" element={<ProductReviews />} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
+            {/* only for admin */}
+            <Route element={<ProductedAdminRoute />}>
+              <Route path="/admin/dashboard" element={<Dashboard />} />
+              <Route path="/admin/products" element={<ProductsList />} />
+              <Route path="/admin/product" element={<NewProduct />} />
+              <Route path="/admin/product/:id" element={<UpdateProduct />} />
+              <Route path="/admin/orders" element={<OrderList />} />
+              <Route path="/admin/order/:id" element={<ProcessOrder />} />
+              <Route path="/admin/users" element={<UsersList />} />
+              <Route path="/admin/user/:id" element={<UpdateUser />} />
+              <Route path="/admin/reviews" element={<ProductReviews />} />
             </Route>
-          </Suspense>
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
-      </Elements>
+      </Suspense>
+      {/* </Elements> */}
       <Footer />
 
       {LogInShow && <AuthScreen />}
