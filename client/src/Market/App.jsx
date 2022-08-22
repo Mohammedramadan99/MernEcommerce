@@ -6,47 +6,50 @@ import Navbar from "./Components/Layout/Navbar";
 import "./Sass/Style.css";
 // import "./Bootstrap/BootStrap/bootstrap.min.css";
 import 'aos/dist/aos.css'
-import AOS from "aos"
-
-import SingleProduct from "./Pages/SingleProduct";
-import AuthScreen from "./Pages/AuthScreen";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Cart from "./Pages/Cart";
-import Success from "./Components/Order/Success";
-import ShippingAddress from "./Components/Cart/ShippingAddress";
-import NotFound from './Components/Layout/Notfound'
-import Payment from './Components/Order/payment'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import Orders from "./Pages/Orders";
-import OrderDetails from "./Components/Order/OrderDetails";
-import Dashboard from './Components/Admin/Dashboard'
-import ProductsList from './Components/Admin/ProductsList'
-import NewProduct from "./Components/Admin/NewProduct";
-import ProductedUserRoute from "./Components/ProductedRoutes/ProductedUserRoute";
 import { useSelector } from 'react-redux'
-import ProductedAdminRoute from "./Components/ProductedRoutes/ProductedAdminRoute";
-import OrderList from "./Components/Admin/OrderList";
-import ProcessOrder from "./Components/Admin/ProcessOrder";
-import UsersList from "./Components/Admin/UsersList";
-import UpdateUser from "./Components/Admin/UpdateUser";
-import ProductReviews from "./Components/Admin/ProductReviews";
-import Profile from "./Components/User/Profile";
-import UpdateProfile from "./Components/User/UpdateProfile";
-import ForgotPassword from "./Components/User/ForgotPassword";
-import ResetPassword from "./Components/User/ResetPassword";
-import Products from "./Pages/Products";
 import HomeOne from "./Components/Home/HomeOne";
 import HomeTwo from "./Components/Home/HomeTwo";
 import HomeVersions from "./Pages/HomeVersions";
 import CustomerRevForm from "./Pages/CustomerRevForm";
-import Blog from "./Pages/Blog";
-import PostDetails from "./Components/Blog/PostDetails";
-import EditPost from "./Components/Blog/EditPost";
-import UpdateProduct from "./Components/Admin/UpdateProduct";
-import NewPost from "./Components/Blog/NewPost";
 import Footer from './Components/Home/sections/Footer'
+import { lazy } from "react";
+import AOS from "aos"
+
+const SingleProduct = lazy(() => import("./Pages/SingleProduct"))
+const Cart = lazy(() => import("./Pages/Cart"))
+const ProductsList = lazy(() => import('./Components/Admin/ProductsList'))
+const Products = lazy(() => import("./Pages/Products"))
+const Blog = lazy(() => import("./Pages/Blog"))
+const PostDetails = lazy(() => import("./Components/Blog/PostDetails"))
+const EditPost = lazy(() => import("./Components/Blog/EditPost"))
+const UpdateProduct = lazy(() => import("./Components/Admin/UpdateProduct"))
+const NewPost = lazy(() => import("./Components/Blog/NewPost"))
+const Payment = lazy(() => import('./Components/Order/payment'))
+const ShippingAddress = lazy(() => import("./Components/Cart/ShippingAddress"))
+const Success = lazy(() => import("./Components/Order/Success"))
+const UsersList = lazy(() => import("./Components/Admin/UsersList"))
+const OrderList = lazy(() => import("./Components/Admin/OrderList"))
+const Orders = lazy(() => import("./Pages/Orders"))
+const OrderDetails = lazy(() => import("./Components/Order/OrderDetails"))
+const ProductReviews = lazy(() => import("./Components/Admin/ProductReviews"))
+const Profile = lazy(() => import("./Components/User/Profile"))
+
+
+const AuthScreen = lazy(() => import("./Pages/AuthScreen"))
+const NotFound = lazy(() => import('./Components/Layout/Notfound'))
+const Dashboard = lazy(() => import('./Components/Admin/Dashboard'))
+const NewProduct = lazy(() => import("./Components/Admin/NewProduct"))
+const ProductedUserRoute = lazy(() => import("./Components/ProductedRoutes/ProductedUserRoute"))
+const ProductedAdminRoute = lazy(() => import("./Components/ProductedRoutes/ProductedAdminRoute"))
+const ProcessOrder = lazy(() => import("./Components/Admin/ProcessOrder"))
+const UpdateUser = lazy(() => import("./Components/Admin/UpdateUser"))
+const UpdateProfile = lazy(() => import("./Components/User/UpdateProfile"))
+const ForgotPassword = lazy(() => import("./Components/User/ForgotPassword"))
+const ResetPassword = lazy(() => import("./Components/User/ResetPassword"))
 export const App = () =>
 {
 
@@ -80,48 +83,50 @@ export const App = () =>
       <ToastContainer />
       <Elements stripe={loadStripe('pk_test_51KU7PlKTQl5sdnSan4XZdyG8ROCvMps693X5fs4PDrQSR8UahyknWe9GPkuem5zqhyoLGE8GKmFa3fPRmq23joWV00XB7Rlte3')}>
         <Routes>
-          <Route path="/" element={<HomeVersions />} />
-          <Route path='/home-v1' element={<HomeOne />} />
-          <Route path='/home-v2' element={<HomeTwo />} />
-          <Route path="/product/:productID" element={<SingleProduct />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/password/reset/:token" element={<ResetPassword />} />
-          <Route path="/password/forgot" element={<ForgotPassword />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:cat" element={<Products />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/new" element={<NewPost />} />
-          <Route path="/blog/:id" element={<PostDetails />} />
-          <Route path="/blog/edit/:id" element={<EditPost />} />
-          {/* <Route path="/blog/new" element={<EditPost/>} /> */}
+          <Suspense fallback={<div />}>
+            <Route path="/" element={<HomeVersions />} />
+            <Route path='/home-v1' element={<HomeOne />} />
+            <Route path='/home-v2' element={<HomeTwo />} />
+            <Route path="/product/:productID" element={<SingleProduct />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/password/reset/:token" element={<ResetPassword />} />
+            <Route path="/password/forgot" element={<ForgotPassword />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:cat" element={<Products />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/new" element={<NewPost />} />
+            <Route path="/blog/:id" element={<PostDetails />} />
+            <Route path="/blog/edit/:id" element={<EditPost />} />
+            {/* <Route path="/blog/new" element={<EditPost/>} /> */}
 
-          {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sed cupiditate non autem doloribus id maxime, ratione voluptatibus quibusdam! Distinctio blanditiis facilis dolorum non, culpa impedit! Tenetur quae voluptate dolore. */}
+            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sed cupiditate non autem doloribus id maxime, ratione voluptatibus quibusdam! Distinctio blanditiis facilis dolorum non, culpa impedit! Tenetur quae voluptate dolore. */}
 
-          {/* only for users */}
-          <Route element={<ProductedUserRoute />}>
-            <Route path="/shipping" element={<ShippingAddress />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/order/:id" element={<OrderDetails />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/profile/update" element={<UpdateProfile />} />
-            <Route path="/customer/FAQ" element={<CustomerRevForm />} />
+            {/* only for users */}
+            <Route element={<ProductedUserRoute />}>
+              <Route path="/shipping" element={<ShippingAddress />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/success" element={<Success />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/order/:id" element={<OrderDetails />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/update" element={<UpdateProfile />} />
+              <Route path="/customer/FAQ" element={<CustomerRevForm />} />
 
-            {/* only for admin */}
-            <Route element={<ProductedAdminRoute />}>
-              <Route path="/admin/dashboard" element={<Dashboard />} />
-              <Route path="/admin/products" element={<ProductsList />} />
-              <Route path="/admin/product" element={<NewProduct />} />
-              <Route path="/admin/product/:id" element={<UpdateProduct />} />
-              <Route path="/admin/orders" element={<OrderList />} />
-              <Route path="/admin/order/:id" element={<ProcessOrder />} />
-              <Route path="/admin/users" element={<UsersList />} />
-              <Route path="/admin/user/:id" element={<UpdateUser />} />
-              <Route path="/admin/reviews" element={<ProductReviews />} />
+              {/* only for admin */}
+              <Route element={<ProductedAdminRoute />}>
+                <Route path="/admin/dashboard" element={<Dashboard />} />
+                <Route path="/admin/products" element={<ProductsList />} />
+                <Route path="/admin/product" element={<NewProduct />} />
+                <Route path="/admin/product/:id" element={<UpdateProduct />} />
+                <Route path="/admin/orders" element={<OrderList />} />
+                <Route path="/admin/order/:id" element={<ProcessOrder />} />
+                <Route path="/admin/users" element={<UsersList />} />
+                <Route path="/admin/user/:id" element={<UpdateUser />} />
+                <Route path="/admin/reviews" element={<ProductReviews />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
             </Route>
-            <Route path="*" element={<NotFound />} />
-          </Route>
+          </Suspense>
         </Routes>
       </Elements>
       <Footer />
