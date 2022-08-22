@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Layout/Navbar";
 
@@ -41,14 +41,12 @@ import HomeOne from "./Components/Home/HomeOne";
 import HomeTwo from "./Components/Home/HomeTwo";
 import HomeVersions from "./Pages/HomeVersions";
 import CustomerRevForm from "./Pages/CustomerRevForm";
-import Footer from "./Components/Home/sections/Footer";
 import Blog from "./Pages/Blog";
 import PostDetails from "./Components/Blog/PostDetails";
 import EditPost from "./Components/Blog/EditPost";
 import UpdateProduct from "./Components/Admin/UpdateProduct";
 import NewPost from "./Components/Blog/NewPost";
-
-
+import Footer from './Components/Home/sections/Footer'
 export const App = () =>
 {
 
@@ -125,8 +123,8 @@ export const App = () =>
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-        <Footer />
       </Elements>
+      <Footer />
 
       {LogInShow && <AuthScreen />}
     </>

@@ -28,6 +28,7 @@ const Profile = () =>
                                 <div className="item">
                                     <h4>Email</h4>
                                     <p>{user.email}</p>
+
                                 </div>
                                 <div className="item">
                                     <h4>Joined On</h4>

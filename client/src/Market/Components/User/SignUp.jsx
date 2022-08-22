@@ -51,8 +51,8 @@ export default function SignUp()
         }
         dispatch(register(userData))
     }
-
-    const createCoverImagesChange = (e) =>
+    // onChange image
+    const createPersonalChange = (e) =>
     {
         const reader = new FileReader();
 
@@ -66,6 +66,7 @@ export default function SignUp()
         };
         reader.readAsDataURL(e.target.files[0]);
     };
+
     return isLoading ? <Spinner /> : (
         <div className="register">
             {message && message}
@@ -103,7 +104,7 @@ export default function SignUp()
                 <div className="field">
                     <input
                         type="file"
-                        onChange={createCoverImagesChange}
+                        onChange={createPersonalChange}
                     />
                 </div>
                 <div className="previewImg">
