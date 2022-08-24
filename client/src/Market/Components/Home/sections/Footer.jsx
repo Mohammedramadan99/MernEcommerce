@@ -22,8 +22,8 @@ export default function Footer()
                         <>
                             <div className="h6"> {item.title} </div>
                             <ul>
-                                {item.items?.map(i => (
-                                    <Link to={i.catName ? `/products/${i.catName}` : "#"}>
+                                {item.items?.map((i, indx) => (
+                                    <Link key={indx} to={i.catName ? `/products/${i.catName}` : "#"}>
                                         <li> {i.catName ? i.catName : i} </li>
                                     </Link>
                                 ))}
@@ -39,8 +39,8 @@ export default function Footer()
                                     {item.title}
                                 </div>
                                 <ul className='social'>
-                                    {item.items.map(i => (
-                                        <Link to="#">
+                                    {item.items.map((i, indx) => (
+                                        <Link key={indx} to="#">
                                             <li> {i} </li>
                                         </Link>
                                     ))}
@@ -49,15 +49,15 @@ export default function Footer()
                         ))}
                     </div>
                     <div className='item'>
-                        {footerData.groupThree.map(item => (
-                            <>
-                                <div className="h6">
+                        {footerData.groupThree.map((item, i) => (
+                            <div key={i}>
+                                <div key={i} className="h6">
                                     {item?.title}
                                 </div>
                                 <div className="img">
                                     <img src={item?.img} alt="" />
                                 </div>
-                            </>
+                            </div>
                         ))}
                     </div>
 

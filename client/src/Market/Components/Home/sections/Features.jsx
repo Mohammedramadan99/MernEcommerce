@@ -29,8 +29,8 @@ export default function Features()
   return (
     <div className='features'>
       <div className="container">
-        {data.map(feat => (
-          <Link to="#" className="item" data-aos={feat.animation}>
+        {data.map((feat, i) => (
+          <Link key={i} to="#" className="item" data-aos={feat.animation}>
             <div className="left">
               <div className="h3"> {feat.title} </div>
               <span> {feat.spanTxt} </span>
