@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, lazy, Suspense, useEffect, useState } from "react";
 // import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { reset, createProduct } from "../../redux/product/productSlice";
@@ -10,9 +10,10 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import StorageIcon from "@mui/icons-material/Storage";
 import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import Sidebar from "./Sidebar";
+
 import Spinner from "../Layout/Spinner";
 import { useNavigate } from 'react-router-dom'
+const Sidebar = lazy(() => import("./Sidebar"));
 
 const NewProduct = () =>
 {
@@ -114,7 +115,9 @@ const NewProduct = () =>
     <Fragment>
       {/* <MetaData title="Create Product" /> */}
       <div className="admin">
-        <Sidebar />
+        <Suspense fallback={<div>loading ... </div>}>
+          <Sidebar />
+        </Suspense>
 
         {/* Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus molestiae dolorum ab maxime saepe adipisci. Inventore doloremque at odio pariatur, aliquid vel. Accusamus perferendis commodi ipsa illo tenetur dolores necessitatibus. */}
         {isLoading ? <Spinner /> : (

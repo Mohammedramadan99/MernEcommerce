@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy } from 'react'
 import { Link, Navigate, useSearchParams } from 'react-router-dom'
-import { motion } from 'framer-motion/dist/es/index'
+// import { motion } from 'framer-motion/dist/es/index'
+
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
@@ -12,6 +13,11 @@ import { addToCart } from '../redux/cart/cartSlice'
 import Spinner from '../Components/Layout/Spinner'
 import Pagination from '../Components/Product/Pagination'
 
+const MotionDev = lazy(() =>
+    import('framer-motion/dist/es/index').then(mod => ({
+        default: mod.motion.div
+    }))
+)
 
 export default function Products()
 {
@@ -143,17 +149,10 @@ export default function Products()
     }
     const detailsHandler = (id) =>
     {
-        // dispatch(addToCart({id:p._id,name:p.name,qty:p.quantity,image:p.images[0].url,price:p.price}))
+
         navigate(`product/${id}`)
         dispatch(reset())
     }
-    // useEffect(() => {
-    //     dispatch(getProducts())
-    // },[])
-
-    // useEffect(() => {
-    // setCurrentProducts(filterProducts.length >= 1 ? filterProducts : products )
-    // }, [currentProducts, filterProducts,products])
 
     useEffect(() =>
     {
@@ -226,23 +225,6 @@ export default function Products()
                         </div>
 
                     ))}
-
-                    {/* <div className="widget_product_title">
-                            {item.title}
-                            <span> <Add  /> </span>
-                        </div>
-                        <div className={`widget_product_content`}>
-                            <div
-                                className="item"
-                                key={'all'}
-                                onClick={(e) => setClickOption({data:{title:item.title}})} 
-                            >
-                                {item.title === 'price' || item.title === 'rating' ? '' : 'all'}
-                            </div>
-
-                            {item.element}
-                        </div>
-                    </div> */}
                     <button className="products_filter__btn" onClick={filterHandler}>filter</button>
                 </div>
                 {isLoading ? <p> <Spinner /> </p> : (
@@ -250,9 +232,9 @@ export default function Products()
                         {currentProducts.length < 1 ? (
                             <p className='no__products'> we don't have category {category} </p>
                         ) : (
-                            <motion.div className="products_group">
+                            <MotionDev className="products_group">
                                 {currentProducts.map(p => (
-                                    <motion.div layout animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }} key={p._id} className="product">
+                                    <MotionDev layout animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }} key={p._id} className="product">
                                         <Link to={`/product/${p._id}`}>
                                             <div className="product__img">
                                                 <img src={p.images[0].url} alt="" />
@@ -266,9 +248,9 @@ export default function Products()
                                                 <div className="product__info__btn" onClick={() => detailsHandler(p._id)}> show </div>
                                             </div>
                                         </Link>
-                                    </motion.div>
+                                    </MotionDev>
                                 ))}
-                            </motion.div>
+                            </MotionDev>
                         )}
                     </>
                 )}

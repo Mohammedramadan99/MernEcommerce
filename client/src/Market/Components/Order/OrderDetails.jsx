@@ -1,25 +1,29 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, lazy, Suspense, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { Link,useParams } from "react-router-dom";
-import { getOrder,reset } from "../../redux/order/orderSlice";
-import UserOptions from '../../Components/Layout/UserOptions'
-import { toast } from "react-toastify";
+import { Link, useParams } from "react-router-dom";
+import { getOrder, reset } from "../../redux/order/orderSlice";
 
-const OrderDetails = () => {
-  const { order, isError, isLoading,message } = useSelector((state) => state.orders.orderDetails);
-  const {id} = useParams()
+import { toast } from "react-toastify";
+const UserOptions = lazy(() => import('../../Components/Layout/UserOptions'))
+
+const OrderDetails = () =>
+{
+  const { order, isError, isLoading, message } = useSelector((state) => state.orders.orderDetails);
+  const { id } = useParams()
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isError) {
+  useEffect(() =>
+  {
+    if (isError)
+    {
       toast.error(message);
       dispatch(reset());
     }
 
     dispatch(getOrder(id));
   }, [dispatch, toast, isError, id]);
-  
+
   return (
     <Fragment>
       {isLoading ? (
@@ -27,7 +31,9 @@ const OrderDetails = () => {
       ) : (
         <Fragment>
           <div className="orderDetailsPage">
-            <UserOptions/>
+            <Suspense fallback={<div>loading</div>}>
+              <UserOptions />
+            </Suspense>
             <div className="order_id">
               Order #{order && order._id}
             </div>
@@ -60,13 +66,13 @@ const OrderDetails = () => {
                       <p
                         className={
                           order.paymentInfo &&
-                          order.paymentInfo.status === "succeeded"
+                            order.paymentInfo.status === "succeeded"
                             ? "greenColor"
                             : "redColor"
                         }
                       >
                         {order.paymentInfo &&
-                        order.paymentInfo.status === "succeeded"
+                          order.paymentInfo.status === "succeeded"
                           ? "PAID"
                           : "NOT PAID"}
                       </p>

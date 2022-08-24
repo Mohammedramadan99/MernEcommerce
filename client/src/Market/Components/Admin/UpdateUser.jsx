@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, lazy, Suspense, useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -6,8 +6,8 @@ import { Button } from "@mui/material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PersonIcon from "@mui/icons-material/Person";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
-import Sidebar from "./Sidebar";
-import Spinner from '../Layout/Spinner'
+
+
 import
 {
     updateProfile,
@@ -15,6 +15,7 @@ import
     reset,
 } from "../../redux/auth/authSlice";
 
+const Sidebar = lazy(() => import("./Sidebar"));
 
 const UpdateUser = () =>
 {
@@ -86,7 +87,9 @@ const UpdateUser = () =>
                 <Sidebar />
                 <div className="newProductContainer" data-aos="zoom-in">
                     {isLoading ? (
-                        <Spinner />
+                        <Suspense fallback={<div>loading ... </div>}>
+                            <Sidebar />
+                        </Suspense>
                     ) : (
                         <form
                             className="createProductForm"

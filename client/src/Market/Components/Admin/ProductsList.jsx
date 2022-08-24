@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, lazy, Suspense } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import
@@ -14,8 +14,7 @@ import { Button } from "@mui/material";
 // import MetaData from "../layout/MetaData";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Sidebar from "./Sidebar";
-// import UserOptions from '../UserOptions'
+const Sidebar = lazy(() => import("./Sidebar"));
 
 
 const ProductList = () =>
@@ -123,7 +122,9 @@ const ProductList = () =>
   return (
     <Fragment>
       <div className="admin">
-        <Sidebar />
+        <Suspense fallback={<div>loading ... </div>}>
+          <Sidebar />
+        </Suspense>
         <div className="productListContainer" data-aos="zoom-in">
           <div className="productListHeading">ALL PRODUCTS</div>
           {/* <UserOptions/> */}

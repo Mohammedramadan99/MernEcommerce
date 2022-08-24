@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 // import { Doughnut, Line } from "react-chartjs-2";
@@ -6,11 +6,9 @@ import { Line, Doughnut } from 'react-chartjs-2'
 import { allUsers, reset } from '../../redux/auth/authSlice'
 import { getAdminOrders } from '../../redux/order/orderSlice'
 import { getAdminProducts } from '../../redux/product/productSlice'
-import Sidebar from "./Sidebar";
-import { Chart as ChartJS } from 'chart.js/auto'
-import { Chart } from 'react-chartjs-2'
 import { toast } from "react-toastify";
 import AOS from 'aos'
+const Sidebar = lazy(() => import("./Sidebar"));
 
 function Dashboard()
 {
@@ -94,7 +92,9 @@ function Dashboard()
 
   return (
     <div className="admin">
-      <Sidebar />
+      <Suspense fallback={<div>loading ... </div>}>
+        <Sidebar />
+      </Suspense>
       <div className="dashboardContainer" data-aos="zoom-in">
         <div className="dashboardHeading">Dashboard</div>
         {/* <UserOptions/> */}

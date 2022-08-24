@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import Sidebar from './Sidebar'
 import { AccountTree, Description, Storage, Spellcheck, AttachMoney } from '@mui/icons-material'
 import { reset, updateProduct, getProductDetails } from '../../redux/product/productSlice'
+const Sidebar = lazy(() => import("./Sidebar"));
 
 export default function UpdateProduct()
 {
@@ -109,7 +109,10 @@ export default function UpdateProduct()
         <>
             {/* <MetaData title="Create Product" /> */}
             <div className="admin">
-                <Sidebar />
+                <Suspense fallback={<div>loading ... </div>}>
+                    <Sidebar />
+                </Suspense>
+
                 <div className="updateProductContainer" data-aos="zoom-in">
                     <div className="updateProductContainer__Heading">update Product</div>
                     <form

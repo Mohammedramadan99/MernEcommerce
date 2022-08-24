@@ -1,17 +1,18 @@
-import React,{useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import React, { lazy, Suspense, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import CheckoutSteps from './CheckoutSteps'
+const CheckoutSteps = lazy(() => import('./CheckoutSteps'))
 
 
 
-function ShippingAddress({setShowSignup}) {
+function ShippingAddress({ setShowSignup })
+{
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const userSignin = useSelector((state) => state.auth.userInfo);
   const { user } = userSignin;
   const cart = useSelector((state) => state.cart);
-  const {products,total } = cart;
+  const { products, total } = cart;
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
@@ -20,7 +21,7 @@ function ShippingAddress({setShowSignup}) {
   const [state, setState] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [country, setCountry] = useState('');
-  
+
   const subtotal = products.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
@@ -32,28 +33,29 @@ function ShippingAddress({setShowSignup}) {
 
   const totalPrice = subtotal + tax + shippingCharges;
 
-  const submitHandler = () => {
-    const shippingInfo = 
+  const submitHandler = () =>
+  {
+    const shippingInfo =
     {
-      fullName: firstName + lastName ,
+      fullName: firstName + lastName,
       phone,
       address,
       city,
       postalCode,
       country,
     }
-    
-  const orderData = {
-    shippingInfo,
-    orderItems:products, // * products: comming from the cart
-    itemsPrice:subtotal,
-    taxPrice:tax,
-    shippingPrice:shippingCharges,
-    totalPrice
-  }
+
+    const orderData = {
+      shippingInfo,
+      orderItems: products, // * products: comming from the cart
+      itemsPrice: subtotal,
+      taxPrice: tax,
+      shippingPrice: shippingCharges,
+      totalPrice
+    }
     // save order information in session
     sessionStorage.setItem("orderInfo", JSON.stringify(orderData));
-      navigate('/payment')
+    navigate('/payment')
   }
 
   // const [lat, setLat] = useState(shippingAddress.lat);
@@ -62,21 +64,22 @@ function ShippingAddress({setShowSignup}) {
   // const { address: addressMap } = userAddressMap;
 
   // to check if use logged in or not befor going to shipping 
-  if (!user) {
+  if (!user)
+  {
     setShowSignup(true)
     // navigate('/signin');
   }
-  
+
   // const submitHandler = (e) => {
   //   e.preventDefault();
-    // const newLat = addressMap ? addressMap.lat : lat;
+  // const newLat = addressMap ? addressMap.lat : lat;
   //   const newLng = addressMap ? addressMap.lng : lng;
   //   if (addressMap) {
-      // setLat(addressMap.lat);
-      // setLng(addressMap.lng);
+  // setLat(addressMap.lat);
+  // setLng(addressMap.lng);
   //   }
   //   let moveOn = true;
-    // if (!newLat || !newLng) {
+  // if (!newLat || !newLng) {
   //     moveOn = window.confirm(
   //       'You did not set your location on map. Continue?'
   //     );
@@ -89,14 +92,14 @@ function ShippingAddress({setShowSignup}) {
   //         city,
   //         postalCode,
   //         country,
-          // lat: newLat,
+  // lat: newLat,
   //         lng: newLng,
   //       })
   //     );
   //     navigate('/payment');
   //   }
   // };
-  
+
   // const chooseOnMap = () => {
   //   // dispatch(
   //   //   saveShippingAddress({
@@ -116,7 +119,9 @@ function ShippingAddress({setShowSignup}) {
   return (
     <div className='shipping'>
       <div className="container">
-      <CheckoutSteps step1 step2></CheckoutSteps>
+        <Suspense fallback={<div> loading </div>}>
+          <CheckoutSteps step1 step2></CheckoutSteps>
+        </Suspense>
         <div className="content">
           <div className="left">
             <div className='title'>
@@ -235,7 +240,7 @@ function ShippingAddress({setShowSignup}) {
                     <div className="price">
                       <p> {p.price} </p>
                     </div>
-                  </div> 
+                  </div>
                 ))}
               </div>
               <div className="total_price">

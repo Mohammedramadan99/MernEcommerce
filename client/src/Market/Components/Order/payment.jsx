@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import StripeCheckout from 'react-stripe-checkout'
 import { toast } from 'react-toastify'
-import CheckoutSteps from '../Cart/CheckoutSteps'
 import { createOrder } from '../../redux/order/orderSlice'
 import { clearCart } from '../../redux/cart/cartSlice'
 import Spinner from '../Layout/Spinner'
@@ -19,6 +17,7 @@ import
   useElements,
 } from "@stripe/react-stripe-js";
 import axios from 'axios'
+const CheckoutSteps = lazy(() => import('../Cart/CheckoutSteps'))
 
 export default function Payment()
 {
@@ -145,7 +144,9 @@ export default function Payment()
   return (
     <div className='payment'>
       <div className="container">
-        <CheckoutSteps step1 step2 step3 step4 />
+        <Suspense fallback={<div> loading </div>}>
+          <CheckoutSteps step1 step2 step3 step4 />
+        </Suspense>
         <div className="h3">
           pay with card
         </div>

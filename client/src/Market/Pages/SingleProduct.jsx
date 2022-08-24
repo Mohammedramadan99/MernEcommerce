@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { SearchOutlined, ArrowRightOutlined, ArrowLeftOutlined } from '@mui/icons-material'
 import Carousel from "react-material-ui-carousel";
@@ -7,19 +7,19 @@ import data from '../data'
 import { useSelector, useDispatch } from 'react-redux'
 import { addReview, reset, getProductDetails } from '../redux/product/productSlice'
 import
-    {
-        Dialog,
-        DialogActions,
-        DialogContent,
-        DialogTitle,
-        Button,
-    } from "@mui/material";
+{
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Button,
+} from "@mui/material";
 import { Rating } from '@mui/lab'
 import ReviewCard from '../Components/Product/ReviewCard'
 import { toast } from 'react-toastify'
 import { addProduct, addToCart } from '../redux/cart/cartSlice'
-import SectionOne from '../Components/SingleProduct/SectionOne'
-import SectionTwo from '../Components/SingleProduct/SectionTwo'
+const SectionOne = lazy(() => import('../Components/SingleProduct/SectionOne'))
+const SectionTwo = lazy(() => import('../Components/SingleProduct/SectionTwo'))
 
 export default function SingleProduct()
 {
@@ -262,8 +262,12 @@ export default function SingleProduct()
                         <p className="noReviews">No Reviews Yet</p>
                     )} */}
                 </div>
-                <SectionOne />
-                <SectionTwo />
+                <Suspense fallback={<div>loading ...</div>}>
+                    <SectionOne />
+                </Suspense>
+                <Suspense fallback={<div>loading ...</div>}>
+                    <SectionTwo />
+                </Suspense>
             </div>
         </div>
     )

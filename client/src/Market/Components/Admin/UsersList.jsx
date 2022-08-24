@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, lazy, Suspense, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,8 +6,9 @@ import { toast } from "react-toastify";
 import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Sidebar from "./Sidebar";
+
 import { allUsers, reset, deleteUser } from "../../redux/auth/authSlice";
+const Sidebar = lazy(() => import("./Sidebar"));
 
 const UsersList = () =>
 {
@@ -122,7 +123,9 @@ const UsersList = () =>
   return (
     <>
       <div className="admin">
-        <Sidebar />
+        <Suspense fallback={<div>loading ... </div>}>
+          <Sidebar />
+        </Suspense>
         <div className="productListContainer" data-aos="zoom-in">
           <div className="dashboardHeading">ALL USERS</div>
           <DataGrid

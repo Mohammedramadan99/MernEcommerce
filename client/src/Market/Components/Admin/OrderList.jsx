@@ -1,5 +1,5 @@
 // continue from 14:00:00m
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, lazy, Suspense, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,13 +7,14 @@ import { toast } from "react-toastify";
 import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Sidebar from "./Sidebar";
+
 import
 {
   deleteOrder,
   getAdminOrders,
   reset,
 } from "../../redux/order/orderSlice";
+const Sidebar = lazy(() => import("./Sidebar"));
 
 const OrderList = () =>
 {
@@ -130,7 +131,10 @@ const OrderList = () =>
   return (
     <Fragment>
       <div className="admin">
-        <Sidebar />
+        <Suspense fallback={<div>loading ... </div>}>
+          <Sidebar />
+        </Suspense>
+
         <div className="productListContainer" data-aos="zoom-in">
           <div className="dashboardHeading">ALL ORDERS</div>
 

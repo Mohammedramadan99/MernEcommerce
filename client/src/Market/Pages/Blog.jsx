@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { allPosts } from '../redux/blog/blogSlice'
 import { Person, PostAdd } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import { Error } from '@mui/icons-material'
-import { motion } from 'framer-motion/dist/es/index'
-import Spinner from '../Components/Layout/Spinner'
 
+import Spinner from '../Components/Layout/Spinner'
+const MotionDev = lazy(() =>
+    import('framer-motion/dist/es/index').then(mod => ({
+        default: mod.motion.div
+    }))
+)
 
 export default function Blog()
 {
@@ -53,7 +57,7 @@ export default function Blog()
                         </select>
                     </div>
                 </div>
-                <motion.div layout className={`${posts.length < 1 ? 'emptyBlog' : 'posts'} `} >
+                <MotionDev layout className={`${posts.length < 1 ? 'emptyBlog' : 'posts'} `} >
                     {isLoading ? <Spinner /> : posts && posts.length < 1 ? (
                         <>
                             <div className="icon">
@@ -62,7 +66,7 @@ export default function Blog()
                             <p>there is no any posts to show</p>
                         </>
                     ) : filteredPosts.map(post => (
-                        <motion.div layout animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }} className="post">
+                        <MotionDev layout animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }} className="post">
                             <div className="img">
                                 <div className="overlay">
                                     <div className="name">
@@ -80,9 +84,9 @@ export default function Blog()
                                 </div>
                                 <Link to={`/blog/${post._id}`} className="btn">read more</Link>
                             </div>
-                        </motion.div>
+                        </MotionDev>
                     ))}
-                </motion.div>
+                </MotionDev>
             </div>
         </div>
     )

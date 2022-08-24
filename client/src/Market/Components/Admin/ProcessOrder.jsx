@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, lazy, Suspense, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import SideBar from "./Sidebar";
 import Spinner from '../Layout/Spinner'
@@ -12,7 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import { Button } from "@mui/material";
-import Sidebar from "./Sidebar";
+const Sidebar = lazy(() => import("./Sidebar"));
+
 
 
 const ProcessOrder = () =>
@@ -61,7 +62,9 @@ const ProcessOrder = () =>
     <Fragment>
 
       <div className="admin">
-        <Sidebar />
+        <Suspense fallback={<div>loading ... </div>}>
+          <Sidebar />
+        </Suspense>
         <div className="processProduct" data-aos="zoom-in">
           {isLoading ? (
             <Spinner />

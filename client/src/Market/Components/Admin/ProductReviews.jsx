@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, lazy, Suspense, useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'
@@ -13,7 +13,7 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Star from "@mui/icons-material/Star";
 import Rating from '../Product/Rating'
-import Sidebar from "./Sidebar";
+const Sidebar = lazy(() => import("./Sidebar"));
 
 const ProductReviews = () =>
 {
@@ -144,7 +144,9 @@ const ProductReviews = () =>
     return (
         <Fragment>
             <div className="admin">
-                <Sidebar />
+                <Suspense fallback={<div>loading ... </div>}>
+                    <Sidebar />
+                </Suspense>
                 <div className="productReviewsContainer" data-aos="zoom-in">
                     <form
                         className="productReviewsForm"
