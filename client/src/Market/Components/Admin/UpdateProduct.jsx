@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy } from 'react'
+import React, { useState, Suspense, useEffect, lazy } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
