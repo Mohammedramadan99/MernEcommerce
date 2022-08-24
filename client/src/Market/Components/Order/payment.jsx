@@ -52,7 +52,7 @@ export default function Payment()
     amount: Math.round(order.totalPrice * 100),
   };
 
-  console.log(order)
+
 
   const submitHandler = async (e) =>
   {
@@ -60,7 +60,7 @@ export default function Payment()
 
     payBtn.current.disabled = true;
     const { shippingInfo } = order
-    console.log(shippingInfo)
+
     try
     {
       const config = {
@@ -109,7 +109,7 @@ export default function Payment()
             id: result.paymentIntent.id,
             status: result.paymentIntent.status,
           };
-          console.log(result)
+
           dispatch(createOrder(order));
           dispatch(clearCart());
 
@@ -123,7 +123,7 @@ export default function Payment()
     {
       payBtn.current.disabled = false;
       toast.error(error);
-      console.log(error)
+
     }
   };
 

@@ -6,7 +6,6 @@ import AOS from 'aos'
 export default function Footer()
 {
     const [footerData, setFooterData] = useState(data.footerItems)
-    console.log(footerData)
 
     useEffect(() =>
     {
@@ -22,11 +21,9 @@ export default function Footer()
                     <div className="footer_items">
                         <>
                             <div className="h6"> {item.title} </div>
-                            {console.log(item)}
                             <ul>
                                 {item.items?.map(i => (
                                     <Link to={i.catName ? `/products/${i.catName}` : "#"}>
-                                        {console.log(i)}
                                         <li> {i.catName ? i.catName : i} </li>
                                     </Link>
                                 ))}
