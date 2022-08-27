@@ -86,8 +86,8 @@ export const App = () =>
       <ToastContainer />
       <Elements stripe={loadStripe('pk_test_51KU7PlKTQl5sdnSan4XZdyG8ROCvMps693X5fs4PDrQSR8UahyknWe9GPkuem5zqhyoLGE8GKmFa3fPRmq23joWV00XB7Rlte3')}>
         <Routes>
-          <Route path="/" element={<HomeVersions />} />
-          <Route path='/home-v1' element={<HomeOne />} />
+          {/* <Route path="/" element={<HomeVersions />} /> */}
+          <Route path='/' element={<HomeOne />} />
           {/* <Route path='/home-v2' element={<HomeTwo />} />
           <Route path="/product/:productID" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
