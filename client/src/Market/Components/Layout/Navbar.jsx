@@ -165,7 +165,7 @@ export default function Navbar()
                                 </div>
                             </Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link to="/">
                                 <div className="link_wrap">
                                     contact
@@ -178,7 +178,7 @@ export default function Navbar()
                                     about
                                 </div>
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link to="/customer/FAQ">
                                 <div className="link_wrap">

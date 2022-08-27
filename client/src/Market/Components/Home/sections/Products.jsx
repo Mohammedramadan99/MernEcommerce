@@ -14,7 +14,7 @@ export default function Products()
     const { filterProducts } = useSelector(state => state.products)
     const { products: productsFilter, isLoading, isError: filterError, message: filterMessage, isSuccess } = filterProducts
     // const [products,setProducts] = useState(data.products)
-    const [listGroup, setListGroup] = useState(['all', 'sneakers', 'dresses', 'coats', 'shirts', 'bags', 'glasses'])
+    const [listGroup, setListGroup] = useState(['all', 'dresses', 'coats'])
     const [activeList, setActiveList] = useState('all')
     const [category, setCategory] = useState("");
     const [currentPage, setCurrentPage] = useState(1);

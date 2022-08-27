@@ -1,5 +1,6 @@
 import React, { useEffect, lazy, Suspense } from 'react'
 import AOS from "aos"
+import Spinner from '../Layout/Spinner'
 
 const LandingPage = lazy(() => import('./sections/LandingPage'))
 const Features = lazy(() => import('./sections/Features'))
@@ -24,25 +25,25 @@ export default function HomeOne()
 
   return (
     <div className='home_one'>
-      <Suspense fallback={<div />} >
+      <Suspense fallback={<Spinner />} >
         <LandingPage />
       </Suspense>
-      <Suspense fallback={<div />} >
+      <Suspense fallback={<Spinner />} >
         <Features />
       </Suspense>
-      <Suspense fallback={<div />} >
+      <Suspense fallback={<Spinner />} >
         <Categories />
       </Suspense>
-      <Suspense fallback={<div />} >
+      <Suspense fallback={<Spinner />} >
         <Products />
       </Suspense>
-      <Suspense fallback={<div />} >
+      <Suspense fallback={<Spinner />} >
         <NewArrivals />
       </Suspense>
-      <Suspense fallback={<div />} >
+      <Suspense fallback={<Spinner />} >
         <CustomersSays />
       </Suspense>
-      <Suspense fallback={<div />} >
+      <Suspense fallback={<Spinner />} >
         <Services />
       </Suspense>
     </div>

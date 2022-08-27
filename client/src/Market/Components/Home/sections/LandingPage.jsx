@@ -15,7 +15,7 @@ export const LandingPage = () =>
                     </div>
                 </div>
                 <div className="img" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="1500">
-                    <img src={LandingImg && LandingImg} alt="" />
+                    <img src="https://res.cloudinary.com/dtmjc8y9z/image/upload/v1656761530/ecommerce/jk9uk8cy5hg6xofsts3y.png" alt="" />
                 </div>
             </div>
         </section>
