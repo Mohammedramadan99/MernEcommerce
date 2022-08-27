@@ -1,6 +1,5 @@
 import React, { useState, useEffect, lazy } from 'react'
 import { Link, Navigate, useSearchParams } from 'react-router-dom'
-// import { motion } from 'framer-motion/dist/es/index'
 
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,8 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Add, Remove, SearchOutlined } from '@mui/icons-material'
 import { Slider } from '@mui/material'
 import Rating from '../Components/Product/Rating'
-import { getFilterProducts, reset, getProducts } from '../redux/product/productSlice'
-import { addToCart } from '../redux/cart/cartSlice'
+import { getFilterProducts, reset } from '../redux/product/productSlice'
 import Spinner from '../Components/Layout/Spinner'
 import Pagination from '../Components/Product/Pagination'
 
@@ -139,10 +137,6 @@ export default function Products()
 
     ]
 
-    const showHandler = (e, title) =>
-    {
-
-    }
     const filterHandler = () =>
     {
         dispatch(getFilterProducts({ keyword, currentPage, price, size, category, ratings }));
@@ -197,7 +191,8 @@ export default function Products()
             <div className="container">
                 <div className="products_filter">
                     {sidebarInfo.map(item => (
-                        <div className={`widget_product ${show && "active"}`} onClick={(e) => showHandler(e, item.title)}>
+                        //  onClick={(e) => showHandler(e, item.title)}
+                        <div className={`widget_product ${show && "active"}`} >
                             {/* accordion -- bootstrap*/}
                             <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
@@ -254,7 +249,6 @@ export default function Products()
                         )}
                     </>
                 )}
-
             </div>
             {productsPerPage <= filterProducts.length && (
                 <Pagination currentPage={currentPage} totalProducts={filterProducts.length} productsPerPage={productsPerPage} paginate={paginate} />

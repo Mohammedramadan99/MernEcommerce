@@ -38,7 +38,6 @@ const productCtrl = {
       product,
     });
   }),
-
   // get product --> 1:46
   getAllProducts: catchAsyncError(async (req, res) => {
     try {

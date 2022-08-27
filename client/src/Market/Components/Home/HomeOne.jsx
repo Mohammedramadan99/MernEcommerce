@@ -30,18 +30,18 @@ export default function HomeOne()
       <Suspense fallback={<div />} >
         <Features />
       </Suspense>
-      <Suspense fallback={<div />} >
+      {/* <Suspense fallback={<div />} >
         <Categories />
-      </Suspense>
-      <Suspense fallback={<div />} >
+      </Suspense> */}
+      {/* <Suspense fallback={<div />} >
         <Products />
-      </Suspense>
+      </Suspense> */}
       <Suspense fallback={<div />} >
         <NewArrivals />
       </Suspense>
-      <Suspense fallback={<div />} >
+      {/* <Suspense fallback={<div />} >
         <CustomersSays />
-      </Suspense>
+      </Suspense> */}
       <Suspense fallback={<div />} >
         <Services />
       </Suspense>

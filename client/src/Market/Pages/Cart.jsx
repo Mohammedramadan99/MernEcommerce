@@ -70,9 +70,9 @@ function Cart()
         <div className="cart">
           <div className="container">
             <div className="PageTitle">cart</div>
-            <div className="top">
+            {/* <div className="top">
               <CheckoutSteps step1 step2></CheckoutSteps>
-            </div>
+            </div> */}
             <div className="bottom">
               <div className="info">
                 {products && products.map((p) => (

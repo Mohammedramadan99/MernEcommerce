@@ -1,17 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { ArrowRight, ArrowLeft } from '@mui/icons-material'
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getFilterProducts, getProducts } from '../../../redux/product/productSlice'
-import { motion } from 'framer-motion/dist/es/index'
 import Spinner from '../../Layout/Spinner'
-
+const SwiperCarousel = lazy(() => import('../../SwiperCarousel'))
 // swiper slider 
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-import 'swiper/swiper.min.css'
-import 'swiper/modules/pagination/pagination.min.css'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
 export default function Products()
 {
@@ -36,10 +29,6 @@ export default function Products()
         title === 'all' ? setCategory('') : setCategory(title)
     }
 
-    const redirectHandler = id =>
-    {
-        navigate(`/product/${id}`)
-    }
     useEffect(() =>
     {
         const data = { category }
@@ -47,10 +36,10 @@ export default function Products()
         dispatch(getFilterProducts(data));
     }, [dispatch, category]);
 
-    useEffect(() =>
-    {
-        setCurrentProducts(productsFilter?.length > 0 ? productsFilter : products)
-    }, [currentProducts, productsFilter, products])
+    // useEffect(() =>
+    // {
+    //     setCurrentProducts(productsFilter?.length > 0 ? productsFilter : products)
+    // }, [currentProducts, productsFilter, products])
 
 
 
@@ -69,38 +58,9 @@ export default function Products()
 
                     <div className="swiper" data-aos="fade-up">
                         {isLoading ? <Spinner /> : isSuccess && (
-                            <div className="swiper-container">
-                                <div className="animation">
-                                    {productsFilter.length > 0 && (
-                                        <Swiper
-                                            navigation={true}
-                                            effect={"coverflow"}
-                                            centeredSlides={true}
-                                            slidesPerView={window.innerWidth < 768 ? 1 : "auto"}
-                                            loop={true}
-                                            coverflowEffect={{
-                                                rotate: 50,
-                                                stretch: 0,
-                                                depth: 100,
-                                                modifier: 1,
-                                                slideShadows: true
-                                            }}
-                                            pagination={{
-                                                clickable: true
-                                            }}
-                                        >
-                                            {productsFilter && productsFilter.map(p => (
-                                                // ${p.activeClass ? 'active' : 'hidden'}
-                                                <SwiperSlide >
-                                                    <Link to={`/product/${p._id}`}>
-                                                        <img src={p.images[0].url} />
-                                                    </Link>
-                                                </SwiperSlide>
-                                            ))}
-                                        </Swiper>
-                                    )}
-                                </div>
-                            </div>
+                            <Suspense fallback={<div> loading ... </div>}>
+                                < SwiperCarousel items={productsFilter} />
+                            </Suspense>
                         )}
                     </div>
                 </div>
