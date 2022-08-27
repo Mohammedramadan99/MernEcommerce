@@ -63,7 +63,7 @@ export const App = () =>
   }, []);
 
   const { LogInShow } = useSelector(state => state.auth)
-  // const [stripeApiKey, setStripeApiKey] = useState("")
+  const [stripeApiKey, setStripeApiKey] = useState("")
 
 
   async function getStripeApiKey()
