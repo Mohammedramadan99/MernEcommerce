@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Sidebar from './Sidebar'
 
-const Dashboard = lazy(() => import('./Dashboard'))
 import ProductsList from './ProductsList'
 import NewProduct from "./NewProduct";
 import OrderList from "./OrderList";
@@ -11,6 +10,8 @@ import UsersList from "./UsersList";
 import UpdateUser from "./UpdateUser";
 import ProductReviews from "./ProductReviews";
 import UpdateProduct from "./UpdateProduct";
+const Dashboard = lazy(() => import('./Dashboard'))
+
 function Admin()
 {
     return (
