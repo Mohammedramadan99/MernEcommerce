@@ -32,7 +32,7 @@ export default function HomeOne()
       </Suspense>
       <Suspense fallback={<div />} >
         <Categories />
-      </Suspense> */}
+      </Suspense>
       <Suspense fallback={<div />} >
         <Products />
       </Suspense>
