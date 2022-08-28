@@ -17,7 +17,7 @@ router
 
 router
   .route("/blog/:id")
-  .get(isAuthenticatedUser, getPost)
+  .get(getPost)
   .put(isAuthenticatedUser, authorizeRoles("admin"), updataPost)
   .delete(isAuthenticatedUser, deletePost);
 

@@ -74,6 +74,7 @@ export default function Products()
                     </div>
                 </div>
                 <Link to="/products" className="btn">shop now</Link>
+
             </div>
         </div>
     )
