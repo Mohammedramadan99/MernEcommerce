@@ -18,7 +18,7 @@ require("express-async-errors");
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    "mongodb://localhost:27017/Ecommerce", //"mongodb+srv://Ecommerce:m1964118@cluster0.7n14b.mongodb.net/Ecommerce_1"
+    "mongodb+srv://Ecommerce:m1964118@cluster0.7n14b.mongodb.net/Ecommerce_1", // "mongodb://localhost:27017/Ecommerce"
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

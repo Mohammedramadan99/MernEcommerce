@@ -145,3 +145,4 @@ export default App;
 // 1. review way : is so bad because of :
 // a. when click on product to show the detailes, the alert of 'review submitted' display .. without make review
 // b. after i click add review, the review will add in dbs but does not display on the moment in the reviews of products, it needs to make refresh
+
