@@ -23,6 +23,15 @@ export default function Products()
     const [keyword, setKeyword] = useState('');
     const [currentProducts, setCurrentProducts] = useState(products)
 
+    // step_1. get all categories
+    const cat = products.map(item => item.category)
+    const allCats = cat.push('all')
+    console.log(allCats)
+    // step_2. filter categories to remove duplecated values
+    const uniqueCategories = cat.filter(function (item, pos)
+    {
+        return cat.indexOf(item) == pos;
+    })
     const listHandler = (title) =>
     {
         title === 'all' ? setActiveList('all') : setActiveList(title)
@@ -51,7 +60,7 @@ export default function Products()
                 </div>
                 <div className="carousel-products" >
                     <ul className="list-group list-group-horizontal justify-content-center" data-aos="fade-right">
-                        {listGroup.map((item, i) => (
+                        {uniqueCategories.map((item, i) => (
                             <li key={i} className={activeList === item ? `list-group-item active` : `list-group-item`} data-filter={item} onClick={() => listHandler(item)} > {item} </li>
                         ))}
                     </ul>

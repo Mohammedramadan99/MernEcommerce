@@ -1,0 +1,22 @@
+[
+    {
+        "name":"LONGCHAMP - Le Pliage Large Tote Bag",
+        "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda nam laudantium nulla quibusdam dolores vero cum et, quasi eum ducimus molestiae beatae consequatur, non expedita unde explicabo, corrupti quo a",
+        "price":58,
+        "images":[{"public_id":"ecommerce/ha488uo3puvxh8ut21sd",
+        "url":"https://res.cloudinary.com/dtmjc8y9z/image/upload/v1652988745/ecommerce/fzyku4whljlds3svpb4q.png"}],
+        "category":"bags",
+        "user":"62e05524666ca47adf4029d4",
+        "Stock":8
+    },
+    {
+        "name":"LONGCHAMP - Le Pliage Small Top-Handle",
+        "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda nam laudantium nulla quibusdam dolores vero cum et, quasi eum ducimus molestiae beatae consequatur, non expedita unde explicabo, corrupti quo a",
+        "price":63,
+        "images":[{"public_id":"ecommerce/ha488uo3puvih8bt21sa",
+        "url":"https://res.cloudinary.com/dtmjc8y9z/image/upload/v1652988697/ecommerce/aapiwm66jtcgs2tcx43u.png"}],
+        "category":"bags",
+        "user":"62e05524666ca47adf4029d4",
+        "Stock":6
+    }
+]
